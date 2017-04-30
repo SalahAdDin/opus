@@ -1,0 +1,37 @@
+version: '2'
+
+services:
+  web:
+      image: nginx:stable
+      ports:
+        - "80:80"
+  master:
+    build: opus-master
+  redis:
+      image: redis:latest
+  db:
+    image: mysql:latest
+    environment:
+      - MYSQL_ONETIME_PASSWORD=yes
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=opus
+      - MYSQL_USER=uzmantech
+      - MYSQL_PASSWORD=opus-wiki-on-docker
+  migration:
+    image: opus-master
+    command: php artisan migrate
+    depends_on:
+      - db
+  key:
+    image: opus-master
+    command: php artisan key:generate
+    depends_on:
+      - db
+      - migration
+  db-seed:
+    image: opus-master
+    command: php artisan db:seed
+    depends_on:
+      - db
+      - migration
+      - key

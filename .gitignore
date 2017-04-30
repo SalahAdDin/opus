@@ -1,0 +1,30 @@
+# File types
+*.pyc
+*.swo
+*.swp
+*.swn
+*.log
+*.mo
+*.sql
+*.sqlite3
+
+# OS files
+.DS_Store
+ehthumbs.db
+Icon?
+Thumbs.db
+*~
+
+# Configuration files
+.idea
+.tags
+.tags_sorted_by_file
+
+# Folders
+.sass-cache
+
+/node_modules
+/static
+/reports
+/uploads
+/media/
