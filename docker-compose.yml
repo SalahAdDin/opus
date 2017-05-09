@@ -14,13 +14,11 @@ services:
   redis:
       image: redis:latest
   db:
-    image: mysql:latest
+    image: postgres:latest
     environment:
-      - MYSQL_ONETIME_PASSWORD=yes
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-      - MYSQL_DATABASE=opus
-      - MYSQL_USER=uzmantech
-      - MYSQL_PASSWORD=opus-wiki-on-docker
+      - POSTGRES_DB=opus
+      - POSTGRES_USER=uzmantech
+      - POSTGRES_PASSWORD=opus-wiki-on-docker
   migration:
     image: opus-master
     command: php artisan migrate

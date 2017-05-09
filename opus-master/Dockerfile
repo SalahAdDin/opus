@@ -13,14 +13,14 @@ RUN apt-get update > /dev/null \
     zip \
     > /dev/null \
     && docker-php-ext-install \
-    pdo_mysql \
+    pdo_pgsql \
     iconv \
     pdo \
     zip \
     mcrypt \
     > /dev/null \
     && docker-php-ext-enable \
-    pdo_mysql \
+    pdo_pgsql \
     iconv \
     pdo \
     zip \
