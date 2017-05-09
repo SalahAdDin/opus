@@ -7,6 +7,10 @@ services:
         - "80:80"
   master:
     build: opus-master
+    image: opus-master
+    command: php artisan serve --host=0.0.0.0 --port=8000
+    ports:
+      - "8000:8000"
   redis:
       image: redis:latest
   db:

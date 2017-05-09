@@ -6,6 +6,7 @@ RUN apt-get update > /dev/null \
     libpng12-dev \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
+    nano \
     git \
     curl \
     unzip \
@@ -51,6 +52,3 @@ ADD conf/.env .env
 #fi
 
 RUN composer install --no-plugins --no-scripts
-# RUN php artisan migrate
-# RUN php artisan key:generate
-# RUN php artisan db:seed
