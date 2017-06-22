@@ -51,4 +51,8 @@ ADD conf/.env .env
 #    git checkout -q $version
 #fi
 
+VOLUME ["/var/www/html/"]
+
 RUN composer install --no-plugins --no-scripts
+
+CMD ["echo", "Opus container"]
