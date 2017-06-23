@@ -55,4 +55,6 @@ VOLUME ["/var/www/html/"]
 
 RUN composer install --no-plugins --no-scripts
 
+VOLUME ["/var/www/html/"]
+
 CMD ["echo", "Opus container"]

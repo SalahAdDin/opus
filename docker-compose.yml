@@ -2,6 +2,7 @@ version: '2'
 
 services:
   web:
+      container_name: opus.web
       image: nginx:stable
       ports:
         - "80:80"
@@ -9,21 +10,25 @@ services:
         - master
       volumes:
         # - ./opus:/var/www/html
-        - ./nginx.conf:/etc/nginx/conf.d/default.conf
+        - ./opus-nginx/conf/nginx.conf:/etc/nginx/conf.d/default.conf
   php:
+      container_name: opus.php
       image: phillaf/php-mysql
       volumes_from:
         - master
       volumes:
         # - ./opus:/var/www/html
         - ./opus-master/conf/php.ini:/usr/local/etc/php/conf.d/custom.ini
-        - ./opus-master/conf/opus.env:/var/www/html/.env
+        - ./opus-master/conf/.env:/var/www/html/.env
   master:
+    container_name: opus.master
     build: opus-master
     image: opus-master
   redis:
+      container_name: opus.redis
       image: redis:latest
   db:
+    container_name: opus.db
     image: mysql:latest
     environment:
       - MYSQL_ONETIME_PASSWORD=yes
@@ -32,17 +37,20 @@ services:
       - MYSQL_USER=uzmantech
       - MYSQL_PASSWORD=opus-wiki-on-docker
   migration:
+    container_name: opus.migration
     image: opus-master
     command: php artisan migrate
     depends_on:
       - db
   key:
+    container_name: opus.key
     image: opus-master
     command: php artisan key:generate
     depends_on:
       - db
       - migration
   db-seed:
+    container_name: opus.db-seed
     image: opus-master
     command: php artisan db:seed
     depends_on:
